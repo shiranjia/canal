@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.otter.canal.client.impl.running.ServerInfo;
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkDataListener;
 import org.apache.commons.lang.StringUtils;
@@ -70,6 +72,47 @@ public class ClusterNodeAccessStrategy implements CanalNodeAccessStrategy {
         } else {
             throw new CanalClientException("no alive canal server");
         }
+    }
+
+    @Override
+    public ServerInfo getServerInfo() {
+        ServerInfo serverData = new ServerInfo();
+        List<ServerRunningData> serverRunningDatas = new ArrayList<ServerRunningData>();
+        if(zkClient.exists(ZookeeperPathUtils.DESTINATION_ROOT_NODE)){
+            List<String> destinations = zkClient.getChildren(ZookeeperPathUtils.DESTINATION_ROOT_NODE);
+            for (String d : destinations){
+                d = ZookeeperPathUtils.DESTINATION_ROOT_NODE + "/" + d ;
+                ServerRunningData serverRunningData = getObject(zkClient , d + "/running", ServerRunningData.class);
+                if(serverRunningData != null){
+                    serverRunningDatas.add(serverRunningData);
+                }
+                //ClientRunningData clientRunningData = getObject(zkClient, d + "/1001/running", ClientRunningData.class);
+
+                //LogPosition logPosition = getObject(zkClient, d + "/1001/cursor", LogPosition.class);
+            }
+        }
+        serverData.setServerRunningDatas(serverRunningDatas);
+
+        return serverData;
+    }
+
+    public static <T> T getObject(ZkClientx zkClientx, String path, Class<T> cla) {
+        String canalRun = getData(zkClientx, path);
+        if (canalRun != null && canalRun.length() > 0) {
+            try {
+                return JSON.parseObject(canalRun, cla);
+            } catch (Exception e) {
+            }
+        }
+        return null;
+    }
+
+    public static String getData(ZkClientx zkClientx, String path) {
+        byte[] ds = zkClientx.readData(path, true);
+        if (null != ds && ds.length > 0) {
+            return new String(ds);
+        }
+        return "";
     }
 
     private void initClusters(List<String> currentChilds) {

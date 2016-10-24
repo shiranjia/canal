@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.otter.canal.client.CanalNodeAccessStrategy;
+import com.alibaba.otter.canal.client.impl.running.ServerInfo;
 
 /**
  * 简单版本的node访问实现
@@ -30,6 +31,11 @@ public class SimpleNodeAccessStrategy implements CanalNodeAccessStrategy {
         } finally {
             index = (index + 1) % nodes.size();
         }
+    }
+
+    @Override
+    public ServerInfo getServerInfo() {
+        return  null;
     }
 
 }

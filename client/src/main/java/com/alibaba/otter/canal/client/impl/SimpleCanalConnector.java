@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.alibaba.otter.canal.client.impl.running.ServerInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -342,6 +343,11 @@ public class SimpleCanalConnector implements CanalConnector {
     public void rollback() throws CanalClientException {
         waitClientRunning();
         rollback(0);// 0代笔未设置
+    }
+
+    @Override
+    public ServerInfo getServerInfo() {
+        return null;
     }
 
     // ==================== helper method ====================

@@ -1,5 +1,8 @@
 package com.alibaba.otter.canal.client;
 
+
+import com.alibaba.otter.canal.client.impl.running.ServerInfo;
+
 import java.net.SocketAddress;
 
 /**
@@ -11,4 +14,6 @@ import java.net.SocketAddress;
 public interface CanalNodeAccessStrategy {
 
     SocketAddress nextNode();
+
+    ServerInfo getServerInfo();
 }

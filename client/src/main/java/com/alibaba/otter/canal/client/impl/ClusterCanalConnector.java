@@ -3,6 +3,7 @@ package com.alibaba.otter.canal.client.impl;
 import java.net.SocketAddress;
 import java.util.concurrent.TimeUnit;
 
+import com.alibaba.otter.canal.client.impl.running.ServerInfo;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -238,6 +239,11 @@ public class ClusterCanalConnector implements CanalConnector {
         }
 
         throw new CanalClientException("failed to rollback after " + times + " times retry");
+    }
+
+    @Override
+    public ServerInfo getServerInfo() {
+        return accessStrategy.getServerInfo();
     }
 
     public void ack(long batchId) throws CanalClientException {

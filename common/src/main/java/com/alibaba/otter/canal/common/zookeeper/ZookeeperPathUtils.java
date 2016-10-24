@@ -33,7 +33,7 @@ public class ZookeeperPathUtils {
 
     public static final String ZOOKEEPER_SEPARATOR                          = "/";
 
-    public static final String OTTER_ROOT_NODE                              = ZOOKEEPER_SEPARATOR + "otter";
+    public static final String OTTER_ROOT_NODE                              = ZOOKEEPER_SEPARATOR + "xnya/otter";
 
     public static final String CANAL_ROOT_NODE                              = OTTER_ROOT_NODE + ZOOKEEPER_SEPARATOR
                                                                               + "canal";

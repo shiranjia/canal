@@ -74,10 +74,8 @@
         <appender-ref ref="CANAL-META" />
     </logger>
     
-	<root level="WARN">
-		<!--  
+	<root level="DEBUG">
 		<appender-ref ref="STDOUT"/>
-		-->
-		<appender-ref ref="CANAL-ROOT" />
+		<!--<appender-ref ref="CANAL-ROOT" />-->
 	</root>
 </configuration>
