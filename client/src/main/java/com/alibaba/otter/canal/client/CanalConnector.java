@@ -1,5 +1,6 @@
 package com.alibaba.otter.canal.client;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
@@ -152,6 +153,6 @@ public interface CanalConnector {
     void rollback() throws CanalClientException;
 
 
-    ServerInfo getServerInfo();
+    Map<String,ServerInfo> getServerInfo();
 
 }

@@ -3,6 +3,7 @@ package com.alibaba.otter.canal.client.impl;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.otter.canal.client.CanalNodeAccessStrategy;
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
@@ -34,7 +35,7 @@ public class SimpleNodeAccessStrategy implements CanalNodeAccessStrategy {
     }
 
     @Override
-    public ServerInfo getServerInfo() {
+    public Map<String,ServerInfo> getServerInfo() {
         return  null;
     }
 

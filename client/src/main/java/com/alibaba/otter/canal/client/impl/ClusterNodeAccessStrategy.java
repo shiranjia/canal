@@ -2,9 +2,7 @@ package com.alibaba.otter.canal.client.impl;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
@@ -75,25 +73,28 @@ public class ClusterNodeAccessStrategy implements CanalNodeAccessStrategy {
     }
 
     @Override
-    public ServerInfo getServerInfo() {
-        ServerInfo serverData = new ServerInfo();
-        List<ServerRunningData> serverRunningDatas = new ArrayList<ServerRunningData>();
+    public Map<String,ServerInfo> getServerInfo() {
+        Map<String,ServerInfo> map = new HashMap<String, ServerInfo>();
         if(zkClient.exists(ZookeeperPathUtils.DESTINATION_ROOT_NODE)){
             List<String> destinations = zkClient.getChildren(ZookeeperPathUtils.DESTINATION_ROOT_NODE);
             for (String d : destinations){
+                String name = d;
+                ServerInfo serverData = new ServerInfo();
                 d = ZookeeperPathUtils.DESTINATION_ROOT_NODE + "/" + d ;
                 ServerRunningData serverRunningData = getObject(zkClient , d + "/running", ServerRunningData.class);
                 if(serverRunningData != null){
-                    serverRunningDatas.add(serverRunningData);
+                    serverData.setServerRunningData(serverRunningData);
                 }
+                List<String> activeServer = zkClient.getChildren(d + "/cluster");
+                serverData.setActiveServer(activeServer);
+                map.put(name,serverData);
                 //ClientRunningData clientRunningData = getObject(zkClient, d + "/1001/running", ClientRunningData.class);
 
                 //LogPosition logPosition = getObject(zkClient, d + "/1001/cursor", LogPosition.class);
             }
         }
-        serverData.setServerRunningDatas(serverRunningDatas);
 
-        return serverData;
+        return map;
     }
 
     public static <T> T getObject(ZkClientx zkClientx, String path, Class<T> cla) {

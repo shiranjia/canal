@@ -7,6 +7,7 @@ import com.alibaba.otter.canal.protocol.Message;
 import com.sun.istack.internal.NotNull;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jiashiran on 2016/10/24.
@@ -21,7 +22,7 @@ public class Client {
                 11111), "example", "", "");*/
         CanalConnector connector = CanalConnectors.newClusterConnector(zk ,"example" , "" , "");
         ServerRunningMonitors.getServerData();
-        ServerInfo serverInfo = connector.getServerInfo();
+        Map<String,ServerInfo> map = connector.getServerInfo();
         int batchSize = 1000;
         int emptyCount = 0;
         try {

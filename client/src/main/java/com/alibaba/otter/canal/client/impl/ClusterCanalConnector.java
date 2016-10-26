@@ -1,6 +1,7 @@
 package com.alibaba.otter.canal.client.impl;
 
 import java.net.SocketAddress;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
@@ -242,7 +243,7 @@ public class ClusterCanalConnector implements CanalConnector {
     }
 
     @Override
-    public ServerInfo getServerInfo() {
+    public Map<String,ServerInfo> getServerInfo() {
         return accessStrategy.getServerInfo();
     }
 

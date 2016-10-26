@@ -9,14 +9,25 @@ import java.util.List;
  */
 public class ServerInfo {
 
-    private List<ServerRunningData> serverRunningDatas;
+    private ServerRunningData serverRunningData;
+
+    private List<String> activeServer;
 
 
-    public List<ServerRunningData> getServerRunningDatas() {
-        return serverRunningDatas;
+
+    public List<String> getActiveServer() {
+        return activeServer;
     }
 
-    public void setServerRunningDatas(List<ServerRunningData> serverRunningDatas) {
-        this.serverRunningDatas = serverRunningDatas;
+    public void setActiveServer(List<String> activeServer) {
+        this.activeServer = activeServer;
+    }
+
+    public ServerRunningData getServerRunningData() {
+        return serverRunningData;
+    }
+
+    public void setServerRunningData(ServerRunningData serverRunningData) {
+        this.serverRunningData = serverRunningData;
     }
 }

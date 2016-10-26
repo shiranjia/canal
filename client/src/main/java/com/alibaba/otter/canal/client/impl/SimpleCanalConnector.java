@@ -8,6 +8,7 @@ import java.nio.ByteOrder;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
@@ -346,7 +347,7 @@ public class SimpleCanalConnector implements CanalConnector {
     }
 
     @Override
-    public ServerInfo getServerInfo() {
+    public Map<String,ServerInfo> getServerInfo() {
         return null;
     }
 

@@ -4,6 +4,7 @@ package com.alibaba.otter.canal.client;
 import com.alibaba.otter.canal.client.impl.running.ServerInfo;
 
 import java.net.SocketAddress;
+import java.util.Map;
 
 /**
  * 集群节点访问控制接口
@@ -15,5 +16,5 @@ public interface CanalNodeAccessStrategy {
 
     SocketAddress nextNode();
 
-    ServerInfo getServerInfo();
+    Map<String,ServerInfo> getServerInfo();
 }
