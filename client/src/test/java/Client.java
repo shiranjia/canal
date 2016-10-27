@@ -64,7 +64,8 @@ public class Client {
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
                 continue;
             }
-
+            String database = entry.getHeader().getSchemaName();
+            String table = entry.getHeader().getTableName();
             CanalEntry.RowChange rowChage = null;
             try {
                 rowChage = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
