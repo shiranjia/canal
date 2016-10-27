@@ -33,11 +33,19 @@ public class ZookeeperPathUtils {
 
     public static final String ZOOKEEPER_SEPARATOR                          = "/";
 
-    public static final String OTTER_ROOT_NODE                              = ZOOKEEPER_SEPARATOR + "xnya/otter";
+    public static final String CANAL_ZK_ROOT_PATH                           = "canal.instance.zk.rootpath";
+    public static final String getCanalRootNode(){
+        String path =  System.getProperty(ZookeeperPathUtils.CANAL_ZK_ROOT_PATH);
+        if(path == null || path.length() == 0){
+            return ZOOKEEPER_SEPARATOR + "otter";
+        }
+        return ZOOKEEPER_SEPARATOR + path;
+    }
+
+    public static final String OTTER_ROOT_NODE                              = getCanalRootNode();//ZOOKEEPER_SEPARATOR + "xnya/otter";
 
     public static final String CANAL_ROOT_NODE                              = OTTER_ROOT_NODE + ZOOKEEPER_SEPARATOR
                                                                               + "canal";
-
     public static final String DESTINATION_ROOT_NODE                        = CANAL_ROOT_NODE + ZOOKEEPER_SEPARATOR
                                                                               + "destinations";
 

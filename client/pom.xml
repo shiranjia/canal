@@ -1,18 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" ">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.alibaba.otter</groupId>
+		<groupId>com.alibaba.otterX</groupId>
 		<artifactId>canal</artifactId>
 		<version>1.0.21-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.alibaba.otter</groupId>
+	<groupId>com.alibaba.otterX</groupId>
 	<artifactId>canal.client</artifactId>
 	<packaging>jar</packaging>
 	<name>canal client module for otter ${project.version}</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba.otter</groupId>
+			<groupId>com.alibaba.otterX</groupId>
 			<artifactId>canal.protocol</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -46,7 +46,7 @@
 			</activation>
 			<build>
 				<plugins>
-					<plugin>
+					<!--<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
 						<version>2.9.1</version>
@@ -93,7 +93,7 @@
 							<pubScmUrl>scm:git:git@github.com:alibaba/canal.git</pubScmUrl>
 							<scmBranch>gh-pages</scmBranch> 
 						</configuration>
-					</plugin>
+					</plugin>-->
 				</plugins>
 			</build>
 		</profile>

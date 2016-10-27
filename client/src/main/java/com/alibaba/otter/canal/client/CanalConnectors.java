@@ -8,6 +8,7 @@ import com.alibaba.otter.canal.client.impl.ClusterNodeAccessStrategy;
 import com.alibaba.otter.canal.client.impl.SimpleCanalConnector;
 import com.alibaba.otter.canal.client.impl.SimpleNodeAccessStrategy;
 import com.alibaba.otter.canal.common.zookeeper.ZkClientx;
+import com.alibaba.otter.canal.common.zookeeper.ZookeeperPathUtils;
 
 /**
  * canal connectors创建工具类
@@ -67,6 +68,27 @@ public class CanalConnectors {
             password,
             destination,
             new ClusterNodeAccessStrategy(destination, ZkClientx.getZkClient(zkServers)));
+        canalConnector.setSoTimeout(30 * 1000);
+        return canalConnector;
+    }
+
+    /**
+     * 创建带cluster模式的客户端链接，自动完成failover切换，服务器列表自动扫描
+     *
+     * @param zkServers
+     * @param zkRootPath
+     * @param destination
+     * @param username
+     * @param password
+     * @return
+     */
+    public static CanalConnector newClusterConnector(String zkServers,String zkRootPath, String destination, String username,
+                                                     String password) {
+        System.setProperty(ZookeeperPathUtils.CANAL_ZK_ROOT_PATH,zkRootPath);
+        ClusterCanalConnector canalConnector = new ClusterCanalConnector(username,
+                password,
+                destination,
+                new ClusterNodeAccessStrategy(destination, ZkClientx.getZkClient(zkServers)));
         canalConnector.setSoTimeout(30 * 1000);
         return canalConnector;
     }

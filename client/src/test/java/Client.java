@@ -17,10 +17,11 @@ public class Client {
     public static void main(String args[]) {
 
         String zk = "192.168.150.119,192.168.150.120,192.168.150.121:2181";
+        String zkNodePath = "xnyf/otter";
         // 创建链接
        /* CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
                 11111), "example", "", "");*/
-        CanalConnector connector = CanalConnectors.newClusterConnector(zk ,"example" , "" , "");
+        CanalConnector connector = CanalConnectors.newClusterConnector(zk , zkNodePath , "example" , "" , "");
         ServerRunningMonitors.getServerData();
         Map<String,ServerInfo> map = connector.getServerInfo();
         int batchSize = 1000;

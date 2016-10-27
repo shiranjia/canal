@@ -245,6 +245,8 @@ public class CanalController {
 
     private InstanceConfig initGlobalConfig(Properties properties) {
         InstanceConfig globalConfig = new InstanceConfig();
+        String rootNode = getProperty(properties, ZookeeperPathUtils.CANAL_ZK_ROOT_PATH);
+        System.setProperty(ZookeeperPathUtils.CANAL_ZK_ROOT_PATH , rootNode);
         String modeStr = getProperty(properties, CanalConstants.getInstanceModeKey(CanalConstants.GLOBAL_NAME));
         if (StringUtils.isNotEmpty(modeStr)) {
             globalConfig.setMode(InstanceMode.valueOf(StringUtils.upperCase(modeStr)));
